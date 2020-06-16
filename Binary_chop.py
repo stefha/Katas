@@ -44,7 +44,33 @@ def chop_recursive(value, array_of_int):
         if array_of_int[middle_index] == value:
             index = middle_index
         elif array_of_int[middle_index] < value:
-            index = middle_index + chop_recursive(value, array_of_int[middle_index:])
+            result_recursive = chop_recursive(value, array_of_int[middle_index:])
+            index = middle_index + result_recursive if result_recursive != -1 else -1
         elif array_of_int[middle_index] > value:
             index = chop_recursive(value, array_of_int[:middle_index])
         return index
+
+
+switcher_dict = {
+    0: -1,
+    1: 0,
+    2: 0,
+
+}
+
+
+def chop_modular(value, array_of_int):
+    if len(array_of_int) >= 3:
+        middle_index = get_middle_index(array_of_int)
+    elif len(array_of_int) == 2:
+        result = 0
+        if array_of_int[0] == value:
+            result = 0
+        elif array_of_int[1] == value:
+            result = 1
+        else:
+            result = -1
+
+
+def get_middle_index(array_of_int):
+    return len(array_of_int) // 2
