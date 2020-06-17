@@ -1,5 +1,5 @@
 import unittest
-from Binary_chop import chop, chop_recursive
+from Binary_chop import chop, chop_recursive, chop_modular
 
 
 class TestBinaryChop(unittest.TestCase):
@@ -49,3 +49,26 @@ class TestBinaryChop(unittest.TestCase):
         self.assertEqual(-1, chop_recursive(4, [1, 3, 5, 7]))
         self.assertEqual(-1, chop_recursive(6, [1, 3, 5, 7]))
         self.assertEqual(-1, chop_recursive(8, [1, 3, 5, 7]))
+
+    def test_chop_modular(self):
+        self.assertEqual(-1, chop_modular(3, []))
+        self.assertEqual(-1, chop_modular(3, [1]))
+        self.assertEqual(0, chop_modular(1, [1]))
+        #
+        self.assertEqual(0, chop_modular(1, [1, 3, 5]))
+        self.assertEqual(1, chop_modular(3, [1, 3, 5]))
+        self.assertEqual(2, chop_modular(5, [1, 3, 5]))
+        self.assertEqual(-1, chop_modular(0, [1, 3, 5]))
+        self.assertEqual(-1, chop_modular(2, [1, 3, 5]))
+        self.assertEqual(-1, chop_modular(4, [1, 3, 5]))
+        self.assertEqual(-1, chop_modular(6, [1, 3, 5]))
+        #
+        self.assertEqual(0, chop_modular(1, [1, 3, 5, 7]))
+        self.assertEqual(1, chop_modular(3, [1, 3, 5, 7]))
+        self.assertEqual(2, chop_modular(5, [1, 3, 5, 7]))
+        self.assertEqual(3, chop_modular(7, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_modular(0, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_modular(2, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_modular(4, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_modular(6, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_modular(8, [1, 3, 5, 7]))

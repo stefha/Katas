@@ -61,15 +61,38 @@ switcher_dict = {
 
 def chop_modular(value, array_of_int):
     if len(array_of_int) >= 3:
-        middle_index = get_middle_index(array_of_int)
-    elif len(array_of_int) == 2:
-        result = 0
+        return recursive_searching(value, array_of_int)
+    else:
+        return terminal_cases(value, array_of_int)
+
+
+def recursive_searching(value, array_of_int):
+    middle_index = get_middle_index(array_of_int)
+    result = -1
+    if array_of_int[middle_index] == value:
+        return middle_index
+    elif array_of_int[middle_index] > value:
+        result = chop_modular(value, array_of_int[0:middle_index])
+        return result if result != -1 else -1
+    elif array_of_int[middle_index] < value:
+        result = chop_modular(value, array_of_int[middle_index + 1:])
+        return result + middle_index + 1 if result != -1 else -1
+
+
+def terminal_cases(value, array_of_int):
+    if len(array_of_int) == 2:
+        result = -1
         if array_of_int[0] == value:
             result = 0
         elif array_of_int[1] == value:
             result = 1
-        else:
-            result = -1
+        return result
+
+    elif len(array_of_int) == 1:
+        return 0 if value == array_of_int[0] else -1
+
+    elif len(array_of_int) == 0:
+        return -1
 
 
 def get_middle_index(array_of_int):
