@@ -1,5 +1,5 @@
 import unittest
-from Binary_chop import chop, chop_recursive, chop_modular
+from Binary_chop import chop, chop_recursive, chop_modular, chop_simple_structure
 
 
 class TestBinaryChop(unittest.TestCase):
@@ -8,6 +8,10 @@ class TestBinaryChop(unittest.TestCase):
         self.assertEqual(-1, chop(3, []))
         self.assertEqual(-1, chop(3, [1]))
         self.assertEqual(0, chop(1, [1]))
+        #
+        self.assertEqual(-1, chop(3, [0, 1]))
+        self.assertEqual(0, chop(1, [1, 5]))
+        self.assertEqual(1, chop(1, [0, 1]))
         #
         self.assertEqual(0, chop(1, [1, 3, 5]))
         self.assertEqual(1, chop(3, [1, 3, 5]))
@@ -32,6 +36,11 @@ class TestBinaryChop(unittest.TestCase):
         self.assertEqual(-1, chop_recursive(3, [1]))
         self.assertEqual(0, chop_recursive(1, [1]))
         #
+        self.assertEqual(-1, chop_recursive(3, [0, 1]))
+        self.assertEqual(0, chop_recursive(1, [1, 5]))
+        self.assertEqual(1, chop_recursive(1, [0, 1]))
+        #
+
         self.assertEqual(0, chop_recursive(1, [1, 3, 5]))
         self.assertEqual(1, chop_recursive(3, [1, 3, 5]))
         self.assertEqual(2, chop_recursive(5, [1, 3, 5]))
@@ -55,6 +64,10 @@ class TestBinaryChop(unittest.TestCase):
         self.assertEqual(-1, chop_modular(3, [1]))
         self.assertEqual(0, chop_modular(1, [1]))
         #
+        self.assertEqual(-1, chop_modular(3, [0, 1]))
+        self.assertEqual(0, chop_modular(1, [1, 5]))
+        self.assertEqual(1, chop_modular(1, [0, 1]))
+        #
         self.assertEqual(0, chop_modular(1, [1, 3, 5]))
         self.assertEqual(1, chop_modular(3, [1, 3, 5]))
         self.assertEqual(2, chop_modular(5, [1, 3, 5]))
@@ -72,3 +85,30 @@ class TestBinaryChop(unittest.TestCase):
         self.assertEqual(-1, chop_modular(4, [1, 3, 5, 7]))
         self.assertEqual(-1, chop_modular(6, [1, 3, 5, 7]))
         self.assertEqual(-1, chop_modular(8, [1, 3, 5, 7]))
+
+    def test_chop_simple_structure(self):
+        self.assertEqual(-1, chop_simple_structure(3, []))
+        self.assertEqual(-1, chop_simple_structure(3, [1]))
+        self.assertEqual(0, chop_simple_structure(1, [1]))
+        #
+        self.assertEqual(-1, chop_simple_structure(3, [0, 1]))
+        self.assertEqual(0, chop_simple_structure(1, [1, 5]))
+        self.assertEqual(1, chop_simple_structure(1, [0, 1]))
+        #
+        self.assertEqual(0, chop_simple_structure(1, [1, 3, 5]))
+        self.assertEqual(1, chop_simple_structure(3, [1, 3, 5]))
+        self.assertEqual(2, chop_simple_structure(5, [1, 3, 5]))
+        self.assertEqual(-1, chop_simple_structure(0, [1, 3, 5]))
+        self.assertEqual(-1, chop_simple_structure(2, [1, 3, 5]))
+        self.assertEqual(-1, chop_simple_structure(4, [1, 3, 5]))
+        self.assertEqual(-1, chop_simple_structure(6, [1, 3, 5]))
+        #
+        self.assertEqual(0, chop_simple_structure(1, [1, 3, 5, 7]))
+        self.assertEqual(1, chop_simple_structure(3, [1, 3, 5, 7]))
+        self.assertEqual(2, chop_simple_structure(5, [1, 3, 5, 7]))
+        self.assertEqual(3, chop_simple_structure(7, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_simple_structure(0, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_simple_structure(2, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_simple_structure(4, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_simple_structure(6, [1, 3, 5, 7]))
+        self.assertEqual(-1, chop_simple_structure(8, [1, 3, 5, 7]))

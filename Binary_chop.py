@@ -96,4 +96,27 @@ def terminal_cases(value, array_of_int):
 
 
 def get_middle_index(array_of_int):
-    return len(array_of_int) // 2
+    return -1 if len(array_of_int) == 0 else len(array_of_int) // 2
+
+
+def chop_simple_structure(value, array_of_int):
+    middle_index = get_middle_index(array_of_int)
+    result = 0
+    if middle_index == -1:
+        result = -1
+    elif middle_index == 0:
+        if array_of_int[0] == value:
+            result = 0
+        elif len(array_of_int) == 2 and middle_index[1] == value:
+            result = 1
+        else:
+            result = -1
+    elif array_of_int[middle_index] == value:
+        result = middle_index
+    elif array_of_int[middle_index] > value:
+        result = chop_modular(value, array_of_int[0:middle_index])
+        result = result if result != -1 else -1
+    elif array_of_int[middle_index] < value:
+        result = chop_modular(value, array_of_int[middle_index + 1:])
+        result = result + middle_index + 1 if result != -1 else -1
+    return result
