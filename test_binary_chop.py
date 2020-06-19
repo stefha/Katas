@@ -1,5 +1,5 @@
 import unittest
-from Binary_chop import chop, chop_recursive, chop_modular, chop_simple_structure
+from Binary_chop import chop, chop_recursive, chop_modular, chop_simple_structure, simple_chop
 
 
 class TestBinaryChop(unittest.TestCase):
@@ -112,3 +112,32 @@ class TestBinaryChop(unittest.TestCase):
         self.assertEqual(-1, chop_simple_structure(4, [1, 3, 5, 7]))
         self.assertEqual(-1, chop_simple_structure(6, [1, 3, 5, 7]))
         self.assertEqual(-1, chop_simple_structure(8, [1, 3, 5, 7]))
+
+
+
+    def test_simple_chop(self):
+        self.assertEqual(-1, simple_chop(3, []))
+        self.assertEqual(-1, simple_chop(3, [1]))
+        self.assertEqual(0, simple_chop(1, [1]))
+        #
+        self.assertEqual(-1, simple_chop(3, [0, 1]))
+        self.assertEqual(0, simple_chop(1, [1, 5]))
+        self.assertEqual(1, simple_chop(1, [0, 1]))
+        #
+        self.assertEqual(0, simple_chop(1, [1, 3, 5]))
+        self.assertEqual(1, simple_chop(3, [1, 3, 5]))
+        self.assertEqual(2, simple_chop(5, [1, 3, 5]))
+        self.assertEqual(-1, simple_chop(0, [1, 3, 5]))
+        self.assertEqual(-1, simple_chop(2, [1, 3, 5]))
+        self.assertEqual(-1, simple_chop(4, [1, 3, 5]))
+        self.assertEqual(-1, simple_chop(6, [1, 3, 5]))
+        #
+        self.assertEqual(0, simple_chop(1, [1, 3, 5, 7]))
+        self.assertEqual(1, simple_chop(3, [1, 3, 5, 7]))
+        self.assertEqual(2, simple_chop(5, [1, 3, 5, 7]))
+        self.assertEqual(3, simple_chop(7, [1, 3, 5, 7]))
+        self.assertEqual(-1, simple_chop(0, [1, 3, 5, 7]))
+        self.assertEqual(-1, simple_chop(2, [1, 3, 5, 7]))
+        self.assertEqual(-1, simple_chop(4, [1, 3, 5, 7]))
+        self.assertEqual(-1, simple_chop(6, [1, 3, 5, 7]))
+        self.assertEqual(-1, simple_chop(8, [1, 3, 5, 7]))

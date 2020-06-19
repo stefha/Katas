@@ -120,3 +120,37 @@ def chop_simple_structure(value, array_of_int):
         result = chop_modular(value, array_of_int[middle_index + 1:])
         result = result + middle_index + 1 if result != -1 else -1
     return result
+
+
+def simple_chop(value, array_of_ints):
+    length = len(array_of_ints)
+    if length >= 3:
+        return search_half_of_range(value, array_of_ints)
+    else:
+        return resolve_terminal_cases(value, array_of_ints)
+
+
+def resolve_terminal_cases(value, array_of_ints):
+    length = len(array_of_ints)
+    result = -1
+    if length == 0:
+        result = -1
+    elif length > 0:
+        result = 0 if value == array_of_ints[0] else -1
+        if result == -1 and length == 2:
+            result = 1 if value == array_of_ints[1] else -1
+    return result
+
+
+def search_half_of_range(value, array_of_ints):
+    middle_index = len(array_of_ints) // 2
+    middle_value = array_of_ints[middle_index]
+    result = 0
+    if middle_value == value:
+        result = middle_index
+    elif middle_value < value:
+        chop_rec_result = simple_chop(value, array_of_ints[middle_index:])
+        result = middle_index + chop_rec_result if chop_rec_result != -1 else -1
+    elif middle_value > value:
+        result = simple_chop(value, array_of_ints[0:middle_index])
+    return result
