@@ -154,3 +154,35 @@ def search_half_of_range(value, array_of_ints):
     elif middle_value > value:
         result = simple_chop(value, array_of_ints[0:middle_index])
     return result
+
+
+def binary_chop_iterative(value, array):
+    offset = 0
+    while len(array) > 1:
+        middle_index = len(array) // 2
+        middle_value = array[middle_index]
+        if value == middle_value:
+            array = array[middle_index:middle_index + 1]  # test
+            offset += middle_index
+        elif value < middle_value:
+            array = array[0:middle_index]
+        else:
+            array = array[middle_index:]
+            offset += middle_index
+
+    return offset if len(array) == 1 and array[0] == value else -1
+
+
+def binary_chop_recursive_new(value, array):
+    if len(array) < 2:
+        return -1 if len(array) == 0 or value != array[0] else 0  # needed ? len(array) == 0 or
+    else:
+        middle_index = len(array) // 2
+        middle_value = array[middle_index]
+        if value == middle_value:
+            return middle_index
+        elif value < middle_value:
+            return binary_chop_recursive_new(value, array[:middle_index])
+        else:
+            rec_result = binary_chop_recursive_new(value, array[middle_index:])
+            return rec_result + middle_index if rec_result != -1 else -1
