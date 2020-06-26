@@ -186,3 +186,35 @@ def binary_chop_recursive_new(value, array):
         else:
             rec_result = binary_chop_recursive_new(value, array[middle_index:])
             return rec_result + middle_index if rec_result != -1 else -1
+
+
+def binary_chop_iterative_2(value, array):
+    offset = 0
+    while len(array) > 1:
+        middle_index = len(array) // 2
+        middle_value = array[middle_index]
+        if value == middle_value:
+            array = array[middle_index:middle_index + 1]
+            offset += middle_index
+        elif value > middle_value:
+            array = array[middle_index:]
+            offset += middle_index
+        else:
+            array = array[:middle_index]
+
+    return offset if len(array) == 1 and array[0] == value else -1
+
+
+def binary_chop_recursive_2(value, array):
+    if len(array) < 2:
+        return 0 if len(array) == 1 and array[0] == value else -1
+    else:
+        middle_index = len(array) // 2
+        middle_value = array[middle_index]
+        if value == middle_value:
+            return middle_index
+        elif value > middle_value:
+            rec_result = binary_chop_recursive_2(value, array[middle_index:])
+            return middle_index + rec_result if rec_result != -1 else -1
+        else:
+            return binary_chop_recursive_2(value, array[:middle_index])
